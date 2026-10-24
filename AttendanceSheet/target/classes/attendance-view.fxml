@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="root" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.attendancesheet.controller.AttendanceController">
+
+    <!-- LEFT SIDEBAR -->
+    <left>
+        <VBox fx:id="sidebar" spacing="10" prefWidth="260">
+            <padding>
+                <Insets top="20" right="16" bottom="20" left="16"/>
+            </padding>
+
+            <Label fx:id="sidebarTitle" text="COURSE MODULES" style="-fx-font-weight: bold; -fx-font-size: 11px; -fx-letter-spacing: 1.5px;"/>
+
+            <TextField fx:id="subjectSearchField" promptText="🔍 Filter subjects..."/>
+
+            <ListView fx:id="classList" VBox.vgrow="ALWAYS"/>
+
+            <TextField fx:id="newSubjectField" promptText="New subject name..."/>
+            <TextField fx:id="teacherNameField" promptText="Instructor / Teacher name..."/>
+            <Button fx:id="addSubjectBtn" text="＋ Create Subject" onAction="#handleAddSubject" maxWidth="Infinity"
+                    style="-fx-background-color: #3A5A40; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-padding: 8 12;"/>
+        </VBox>
+    </left>
+
+    <!-- TOP TOOLBAR -->
+    <top>
+        <HBox fx:id="topBar" spacing="12" alignment="CENTER_LEFT">
+            <padding>
+                <Insets top="14" right="20" bottom="14" left="20"/>
+            </padding>
+
+            <Label fx:id="enrollLabel" text="ENROLL:" style="-fx-font-weight: bold; -fx-font-size: 11px;"/>
+            <TextField fx:id="idField" promptText="Student ID" prefWidth="115"/>
+            <TextField fx:id="nameField" promptText="Student Full Name" prefWidth="180"/>
+            <Button fx:id="addStudentBtn" text="＋ Add Student" onAction="#handleAddStudent"
+                    style="-fx-background-color: #3A5A40; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-padding: 8 12;"/>
+
+            <Separator orientation="VERTICAL" prefHeight="26"/>
+
+            <TextField fx:id="searchField" promptText="🔍 Quick search record..." prefWidth="160"/>
+
+            <Separator orientation="VERTICAL" prefHeight="26"/>
+
+            <Button text="🔍-" onAction="#zoomOut"/>
+            <Button fx:id="zoomResetBtn" text="100%" onAction="#zoomReset"/>
+            <Button text="🔍+" onAction="#zoomIn"/>
+
+            <Separator orientation="VERTICAL" prefHeight="26"/>
+
+            <Button fx:id="modeToggleBtn" text="🌙 Dark Mode" onAction="#toggleDarkMode"/>
+            <Button fx:id="translateBtn" text="🌐 中文" onAction="#toggleLanguage"/>
+        </HBox>
+    </top>
+
+    <!-- CENTER -->
+    <center>
+        <VBox fx:id="centerContainer" spacing="10">
+            <padding>
+                <Insets top="24" right="24" bottom="24" left="24"/>
+            </padding>
+
+            <Label fx:id="middleSubjectHeader" text="Comprehensive Design of Data Structures"
+                   style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+            <Label fx:id="middleTeacherHeader" text="Instructor: Prof. Lord"
+                   style="-fx-font-size: 14px;"/>
+
+            <TableView fx:id="table" VBox.vgrow="ALWAYS" prefHeight="430"/>
+
+            <HBox spacing="10" alignment="CENTER_RIGHT">
+                <MenuButton fx:id="importFileBtn" text="📂 Import File">
+                    <items>
+                        <MenuItem text="Word Document (.docx / .doc / .txt)" onAction="#importWord"/>
+                        <MenuItem text="Excel Spreadsheet (.xlsx / .xls / .csv)" onAction="#importExcel"/>
+                        <MenuItem text="CSV File (.csv)" onAction="#importCsv"/>
+                        <MenuItem text="PDF Document (.pdf)" onAction="#importPdf"/>
+                    </items>
+                </MenuButton>
+
+                <MenuButton fx:id="exportFileBtn" text="💾 Export File">
+                    <items>
+                        <MenuItem text="Word Document (.docx / .doc)" onAction="#exportWord"/>
+                        <MenuItem text="Excel Spreadsheet (.xlsx / .xls)" onAction="#exportExcel"/>
+                        <MenuItem text="CSV File (.csv)" onAction="#exportCsv"/>
+                        <MenuItem text="PDF Document (.pdf)" onAction="#exportPdf"/>
+                    </items>
+                </MenuButton>
+
+                <Button fx:id="copyAllBtn" text="📋 Copy All" onAction="#handleCopyAll"/>
+                <Button fx:id="pasteAllBtn" text="📋 Paste All" onAction="#handlePasteAll"/>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>
